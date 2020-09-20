@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}Chats{% endblock %}
+{% block body %}
+<div class="container">
+    <div class=" chat-welcome d-flex justify-content-center"><span>Chats</span></div>
+    <div class=" row">
+    <div class=" container col-md-3 chats d-flex flex-column align-items-center justify-content-center">
+{% for name in others_name %}
+        <div >
+            <form action="/chats" method="POST">
+                <button class="chat-btn" name="chat-btn" value="{{name}}"> {{name}} </button>
+            </form>
+        </div>
+{% endfor %}
+    </div>
+    <div class="col-12 col-md-9 messages">
+        <div class="msg-container d-flex flex-column-reverse">
+            {% for msg in msgs%}
+            {% if msg["sender_id"] == user_id%}
+            <div class="mymsg msg">
+                 <div>{{msg["msgtxt"]}}</div>
+                  <div class="msg-date">{{msg["date"]}}</div>
+            </div>
+            {% else %}
+            <div class="hismsg msg">
+                <div>{{msg["msgtxt"]}}</div>
+                 <div class="msg-date">{{msg["date"]}}</div>
+           </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="msgbar d-flex align-items-center justify-content-center">
+            <div class="msg-form">
+            <form action="/msgs" method="POST">
+                    {% if session["chatter_id"] == ""%}
+                        <textarea class="msg-txt " autocomplete="off" placeholder="Select the chat first" name="msg" disabled></textarea>
+                        {% else %}
+                        <textarea class="msg-txt enabled" autocomplete="off" placeholder="Write your message here" name="msg"></textarea>
+                        {% endif %}
+                </div>
+                <div class="msg-btn-con">
+                    {% if session["chatter_id"] == ""%}
+                    <button class="msg-btn type="submit" disabled>Send</button>
+                    {% else %}
+                    <button class="msg-btn type="submit">Send</button>
+                    {% endif %}
+                </form>
+                </div>
+        </div>
+        <div>{{message}}</div>
+    </div>
+</div>
+</div>
+{% endblock %}

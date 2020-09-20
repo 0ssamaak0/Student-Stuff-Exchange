@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block body %}
+<div class="container row csign">
+    <div class="nextsign col-12 col-md-6 d-flex flex-column justify-content-center">
+        <div>
+            <span class="norm">many of your colleagues are waiting for you</span>
+            <span class="norm"></span>
+            <img src="/static/login.svg">
+        </div>
+        
+    </div>
+    <div class="sign d-flex justify-content-center flex-column col-md-6 col-12">
+    <form action="/login" method="POST">
+        <div>
+            <div>
+                <div>
+                    <span class="fa fa-user fa-sm"></span>
+                    <span class="sign-span">Username</span>
+                </div>
+            </div>
+            <input class="text-input" type="text" name="username" autofocus autocomplete="off" placeholder="Username" >
+        </div>
+        <div>
+            <div>
+                <div>
+                    <span class="fa fa-lock fa-sm"></span>
+                    <span class="sign-span">Password</span>
+                </div>
+            </div>
+            <input class="text-input" type="password" name="password" autocomplete="off" placeholder="Password">
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit">Login</button>
+        </div>
+    </form>
+    <div class="message">{{message}}</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

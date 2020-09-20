@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block body %}
+<div class="container row csign">
+    <div class="nextsign col-12 col-md-6 d-flex flex-column justify-content-around">
+        <div>
+            <span class="norm">join the</span>
+            <span class="imp">community </span>
+            <span class="norm">now.<br> many of your colleagues are waiting for you</span>
+            <img src="/static/register.svg">
+        </div>
+        
+    </div>
+    <div class="sign d-flex justify-content-center flex-column col-md-6 col-12">
+    <form action="/register" method="POST">
+    <div>
+        <div>
+            <span class="fa fa-user fa-sm"></span>
+            <span class="sign-span">Username</span>
+        </div>
+        <input class="text-input" type="text" name="username" autofocus autocomplete="off" value="{{username}}" >
+    </div>
+    <div>
+        <div>
+            <span class="fa fa-lock fa-sm"></span>
+            <span class="sign-span">Password</span>
+        </div>
+        <input class="text-input" type="password" name="password" autocomplete="off">
+    </div>
+    <div>
+        <div>
+            <span class="fa fa-lock fa-sm"></span>
+            <span class="sign-span">Password Confirmation</span>
+        </div>
+        <input class="text-input" type="password" name="repassword" autocomplete="off">
+    </div>
+    <div class="d-flex justify-content-center">
+        <button type="submit">Register</button>
+    </div>
+    </form>
+    <div class="message">{{message}}</div>
+</div>
+</div>
+
+
+{% endblock %}

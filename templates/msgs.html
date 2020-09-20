@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Chat with {{chatter}} {% endblock %}
+{% block body %}
+<div>
+    {% for msg in msgs%}
+    {% if msg["sender_id"] == user_id%}
+    <div style="color: blue;"> {{msg["msgtxt"]}} at {{msg["date"]}} </div>
+    {% else %}
+    <div style="color: red;"> {{msg["msgtxt"]}} at {{msg["date"]}}</div>
+    {% endif %}
+    {% endfor %}
+</div>
+<div>
+    <form action="/msgs" method="POST">
+        <div>
+            <input type="text" autocomplete="off" placeholder="Write your message here" name="msg">
+        </div>
+        <div>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</div>
+<div>{{message}}</div>
+{% endblock %}

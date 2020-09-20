@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+<div class="post d-flex flex-column justify-content-center align-items-center">
+<form action="/post" method="POST">
+    <div class="postNtag" class="row container">
+    <div class="col-12 d-flex justify-content-center">
+        <textarea class="post-text" autocomplete="off" name="post" placeholder="Enter your post here"></textarea>
+    </div>
+    <div class="col-12 d-flex justify-content-center">
+    <select name="tag">
+        <option value="None" disabled selected>Tag</option>
+        {% for tag in tags %}
+        <option value="{{tag}}">{{tag}}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="col-12 d-flex justify-content-center">
+        <button class="post-btn" type="submit">Post</button>
+    </div>
+    <div class="col-12 d-flex justify-content-center"><br>{{message}}</div>
+    </div>
+</form>
+    <form class="search" action="/home" method="POST" class="">
+        <div class="postNtag sec" class="row container">
+            <div class="col-12 d-flex justify-content-center">
+    <select name="tag">
+        <option value="All">All</option>
+        {% for tag in tags %}
+        {% if tag == selected_tag%}
+        <option value="{{tag}}" selected>{{tag}}</option>
+        {% else %}
+        <option value="{{tag}}">{{tag}}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+</div>
+<div class="col-12 d-flex justify-content-center avl">
+    <br>
+    <select name="state">
+        {% if selected_state == "0"%}
+        <option value="0" selected>Available</option>
+        {% else %}
+        <option value="0">Available</option>
+        {% endif %}
+
+        {% if selected_state == "All"%}
+        <option value="All" selected>All</option>
+        {% else %}
+        <option value="All">All</option>
+        {% endif %}
+
+        {% if selected_state == "1"%}
+        <option value="1" selected>Unvailable</option>
+        {% else %}
+        <option value="1">Unvailable</option>
+        {% endif %}
+    </select>
+</div>
+<div class="col-12 d-flex justify-content-center">
+    <button class="post-btn" type="submit">Search</button>
+</div> 
+</div>
+</form>
+    </div>
+
+
+{% for post in post_list%}
+<div class="d-flex flex-column align-items-center container">
+    <div class="full-post">
+    <div class="top-post">
+        <div><span class="name-span">{{post["username"]}}:</span></div>
+        <div><span class="date-span">{{post["date"]}}</span></div>
+    </div>
+    <div class="bot-post">
+        <div><span class="post-span">{{post["post"]}}</span></div>
+        <div><span class="tag-span">{{post["tag"]}}</span></div>
+        {% if user_id != post["poster"] %}
+        {% if post["state"] == 0 %}
+        <div class="post-take align-self-center">
+            <form action="/take" method="POST">
+                <button class="home-btn" type="submit" value={{post["post_id"]}} name="take_btn">Take it!</button>
+            </form>
+            {% elif post["state"] == 1 %}
+            <div class="post-take align-self-center">
+            <form action="/take" method="POST">
+                <button class="home-btn disabled" type="submit" value={{post["post_id"]}} name="take_btn" disabled>Taken!</button>
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    </div>
+</div>
+<br>
+{% endfor %}
+{% endblock %}

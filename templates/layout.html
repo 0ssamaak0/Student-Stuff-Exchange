@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% if session["theme"] == 0%}
+    <link rel="stylesheet" href="/static/styles-light.css">
+    {% elif session["theme"] == 1%}
+    <link rel="stylesheet" href="/static/styles-dark.css">
+    {% else %}
+    <link rel="stylesheet" href="/static/styles-light.css">
+    {% endif %}
+    <link rel="icon" href="/static/logo-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Yanone+Kaffeesatz:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>SSE - {% block title %} {% endblock %}</title>
+    <div class="preloader">
+        <img src="/static/logo-animated.gif" loop>
+    </div>
+</head>
+<body>
+    <main>
+    <nav class="">
+        <div class="nav d-lg-flex d-md-flex d-sm-block align-items-center justify-content-md-between justify-content-center">
+        <div id="logo" class="d-flex justify-content-between align-items-center">
+            <a href="/"><img id="logo-img" src="/static/logo-lg.png"></a>
+            <button id="menu-btn" class="fa fa-bars fa-lg d-md-none" ></button>
+        </div>
+        <ul id="nav-items" class="d-flex justify-content-around justify-content-md-around flex-column flex-md-row align-items-center">
+            {% if session["user_id"]%}
+            <li class="d-inline"><a href="/home">Home</a></li>
+            <li class="d-inline"><a href="/">Features</a></li>
+            <li class="d-inline"><a href="/chats">Chats</a></li>
+            <li class="d-inline"><a href="/logout">Log Out</a></li>
+                <form action="/theme" method="POST" class="theme">
+                    {% if session["theme"] == 0%}
+                    <button class="theme-btn" value="dark" type="submit" name="change"><span class="fa fa-adjust fa-lg"></span></button>
+                    {% elif session["theme"] == 1%}
+                    <button class="theme-btn" value="light" type="submit" name="change"><span class="fa fa-adjust fa-lg"></span></button>
+                    {% endif %}
+                </form>
+            {% else %}
+            <li class="d-inline"><a href="/">Features</a></li>
+            <li class="d-inline"><a href="/login">Login</a></li>
+            <li class="d-inline"><a href="/register">Register</a></li>
+            {% endif %}
+            </ul>
+        </div>
+    </nav>
+        {% block body %}
+        {% endblock %}
+
+    </main>
+    <footer>
+        <div class="d-flex align-items-center justify-content-between footer-div">
+            <div>
+                <span>@0ssamaak0</span>
+            </div>
+            <div>
+                <a class="feedback" href = "mailto:0ssamaak0@gmail.com?">
+                <span class="fa fa-envelope fa-lg"></span>
+                <span>Contact</span>
+            </a>
+            </div>
+            <div>
+                <span>Special Thanks for: Prof. David Malan, Brian Yu and all CS50 Staff!</span>
+            </div>
+            
+
+        </div>
+
+    </footer>
+
+
+
+
+
+    <script src="/static/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
