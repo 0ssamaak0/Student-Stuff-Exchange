@@ -15,4 +15,4 @@ how this gonna work? it's all simple, just register and go to the home pages:
 - assuming your posted item has been taken, you can move to your chats and message the person
   which you will take / give the item to. and determine where you can meet
   
-  This project is submitted as a final project for CS50X 2020
+  ###This project is submitted as a final project for CS50X 2020
